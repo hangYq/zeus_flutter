@@ -1,16 +1,10 @@
 # zeus
 
-A new Flutter project.
+## Flutter 异步编程
 
-## Getting Started
+### Isolate
 
-This project is a starting point for a Flutter application.
+- Isolate 相当于 Dart 语言种的 Thread，是 Dart/Flutter 的执行上下文；
+- Isolate 有自己独立的内存地址和 Event Loop，不存在共享内存，所以不会出现死锁，但是比 Thread 更耗内存；
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
