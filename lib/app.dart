@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Zeus',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        // useMaterial3: true,
       ),
       home: const HomePage(),
       onGenerateRoute: (RouteSettings settings) {
