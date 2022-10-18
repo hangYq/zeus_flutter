@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import '../../routes/routes.dart';
+import '../../routes/constants.dart';
+import '../../utils/navigator.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+    this.arguments,
+  }) : super(key: key);
+
+  final dynamic arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +20,25 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        children: [
-          TextButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.red),
-            ),
-            child: const Text('Isolate Page'),
-          ),
-        ],
+        children: AppRoutes.routes.keys
+            .map(
+              (String item) => TextButton(
+                onPressed: () {
+                  if (item == RoutesName.homePage) {
+                    return;
+                  }
+                  ZeusNavigator.open(
+                    context,
+                    item,
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.yellow),
+                ),
+                child: Text(item),
+              ),
+            )
+            .toList(),
       ),
     );
   }

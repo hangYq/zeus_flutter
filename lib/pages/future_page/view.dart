@@ -3,19 +3,24 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class IsolateDemoPage extends StatefulWidget {
-  const IsolateDemoPage({Key? key}) : super(key: key);
+class FutureDemoPage extends StatefulWidget {
+  const FutureDemoPage({
+    Key? key,
+    this.arguments,
+  }) : super(key: key);
+
+  final dynamic arguments;
 
   @override
-  State<IsolateDemoPage> createState() => _IsolateDemoPageState();
+  State<FutureDemoPage> createState() => _FutureDemoPageState();
 }
 
-class _IsolateDemoPageState extends State<IsolateDemoPage> {
+class _FutureDemoPageState extends State<FutureDemoPage> {
   int _count = 0;
 
   static FutureOr<int> _increment(int initCount) async {
     int counter = initCount;
-    for (var i = 0; i < 100000; i++) {
+    for (var i = 0; i < 1000000000; i++) {
       counter += i;
     }
     return counter;
@@ -55,20 +60,37 @@ class _IsolateDemoPageState extends State<IsolateDemoPage> {
               'assets/images/rabbit.gif',
             ),
             Text('你点击了$_count次'),
-            OutlinedButton(
-              onPressed: _onReset,
-              child: const Text(
-                'reset',
-              ),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OutlinedButton(
+                  onPressed: _onReset,
+                  child: const Text(
+                    'reset',
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                OutlinedButton(
+                  onPressed: _incrementCounter,
+                  child: const Text(
+                    'ANR increment',
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                OutlinedButton(
+                  onPressed: _incrementCounterByCompute,
+                  child: const Text(
+                    'compute',
+                  ),
+                ),
+              ],
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // onPressed: _incrementCounter,
-        onPressed: _incrementCounterByCompute,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
