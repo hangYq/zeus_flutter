@@ -3,6 +3,7 @@ import 'package:zeus/pages/future_page/view.dart';
 
 import '../pages/button_page/view.dart';
 import '../pages/home_page/view.dart';
+import '../pages/scoped_model/view.dart';
 import './constants.dart';
 
 typedef PageBuilder = Widget Function(
@@ -17,5 +18,6 @@ class AppRoutes {
     RoutesName.futurePage: (context, {arguments}) =>
         FutureDemoPage(arguments: arguments),
     RoutesName.buttonPage: (context, {arguments}) => ButtonDemoPage(),
+    RoutesName.scopedModel: (context, {arguments}) => ScopedModelDemoPage(),
   };
 }
