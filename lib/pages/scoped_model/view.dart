@@ -16,14 +16,18 @@ class ScopedModelDemoPage extends StatelessWidget {
       body: ScopedModel(
         model: CounterModel(),
         child: ScopedModelDescendant<CounterModel>(
-          builder: (context, child, model) => Column(
-            children: [
-              Text('${model.counter}'),
-              OutlinedButton(
-                onPressed: model.increment,
-                child: Text('add'),
-              ),
-            ],
+          builder: (context, child, model) => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('${model.counter}'),
+                OutlinedButton(
+                  onPressed: ScopedModel.of<CounterModel>(context).increment,
+                  // onPressed: model.increment,
+                  child: Text('add'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
