@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonDemoPage extends StatelessWidget {
   const ButtonDemoPage({Key? key}) : super(key: key);
@@ -32,6 +33,7 @@ class ButtonDemoPage extends StatelessWidget {
               'TextButton',
             ),
           ),
+          Text(AppLocalizations.of(context)!.helloWorld),
         ],
       ),
     );
