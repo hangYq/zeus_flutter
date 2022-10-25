@@ -15,6 +15,21 @@ class ScopedModelDemoPage extends StatelessWidget {
       ),
       body: ScopedModel(
         model: CounterModel(),
+        // 不使用 ScopedModelDescendant 的用法
+        // child: Builder(
+        //   builder: (context) {
+        //     return Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text('${CounterModel.of(context).counter}'),
+        //         OutlinedButton(
+        //           onPressed: CounterModel.of(context).increment,
+        //           child: Text('add1'),
+        //         ),
+        //       ],
+        //     );
+        //   },
+        // ),
         child: ScopedModelDescendant<CounterModel>(
           builder: (context, child, model) => Center(
             child: Column(
