@@ -5,6 +5,7 @@ import '../pages/button_page/view.dart';
 import '../pages/custom_provider_page/view.dart';
 import '../pages/home_page/view.dart';
 import '../pages/inherited_page/view.dart';
+import '../pages/provider_page/view.dart';
 import '../pages/scoped_model_page/view.dart';
 import './constants.dart';
 
@@ -24,5 +25,6 @@ class AppRoutes {
     RoutesName.inherited: (context, {arguments}) => InheritedDemoPage(),
     RoutesName.customProvider: (context, {arguments}) =>
         CustomProviderDemoPage(),
+    RoutesName.providerPage: (context, {arguments}) => ProviderDemoPage(),
   };
 }

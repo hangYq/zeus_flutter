@@ -5,4 +5,5 @@ class RoutesName {
   static const String scopedModel = "scoped_model";
   static const String inherited = "inherited";
   static const String customProvider = "custom_provider";
+  static const String providerPage = "provider_page";
 }
