@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 class ProviderDemoPage extends StatelessWidget {
   ProviderDemoPage({super.key});
-  var _providerViewModel = ProviderViewModel();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,16 +13,15 @@ class ProviderDemoPage extends StatelessWidget {
           centerTitle: true,
         ),
         body: ChangeNotifierProvider.value(
-          value: _providerViewModel,
+          value: ProviderViewModel(),
           builder: (context, child) {
             return Column(
               children: [
                 const Text("我是父节点"),
                 Text(
-                    "Parent number is: ${Provider.of<ProviderViewModel>(context).number}"),
+                  "Parent number is: ${Provider.of<ProviderViewModel>(context).number}",
+                ),
                 ChildA(),
-                //ChildB(),
-                //ChildC()
               ],
             );
           },
@@ -31,7 +29,7 @@ class ProviderDemoPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            _providerViewModel.addNumber();
+            Provider.of<ProviderViewModel>(context, listen: false).addNumber();
           }, //使用context.read不会调用rebuild
         ),
       ),
