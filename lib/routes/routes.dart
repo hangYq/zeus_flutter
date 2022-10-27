@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../pages/bloc_page/components/bloc_demo_page/bloc_demo_page.dart';
 import '../pages/bloc_page/components/future_builder_page/future_builder_page.dart';
 import '../pages/bloc_page/components/stream_builder_page/stream_builder_page.dart';
 import '../pages/future_page/view.dart';
@@ -31,7 +32,8 @@ class AppRoutes {
     RoutesName.customProvider: (context, {arguments}) =>
         CustomProviderDemoPage(),
     RoutesName.providerPage: (context, {arguments}) => ProviderDemoPage(),
-    RoutesName.blocPage: (context, {arguments}) => BlocDemoPage(),
+    RoutesName.blocPage: (context, {arguments}) => BlocPage(),
+    RoutesName.blocDemoPage: (context, {arguments}) => BlocDemoPage(),
     RoutesName.streamControllerDemoPage: (context, {arguments}) =>
         StreamControllerDemoPage(),
     RoutesName.streamGenerateDemoPage: (context, {arguments}) =>

@@ -7,6 +7,7 @@ class RoutesName {
   static const String customProvider = "custom_provider";
   static const String providerPage = "provider_page";
   static const String blocPage = "bloc_page";
+  static const String blocDemoPage = "bloc_page/bloc_demo_page";
   static const String streamControllerDemoPage =
       "bloc_page/stream_controller_demo_page";
   static const String streamGenerateDemoPage =
