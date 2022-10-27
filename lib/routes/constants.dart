@@ -11,4 +11,8 @@ class RoutesName {
       "bloc_page/stream_controller_demo_page";
   static const String streamGenerateDemoPage =
       "bloc_page/stream_generate_demo_page";
+  static const String futureBuilderDemoPage =
+      "bloc_page/future_builder_demo_page";
+  static const String streamBuilderDemoPage =
+      "bloc_page/stream_builder_demo_page";
 }

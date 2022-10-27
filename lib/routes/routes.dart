@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:zeus/pages/future_page/view.dart';
 
+import '../pages/bloc_page/components/future_builder_page/future_builder_page.dart';
+import '../pages/bloc_page/components/stream_builder_page/stream_builder_page.dart';
+import '../pages/future_page/view.dart';
 import '../pages/bloc_page/components/stream_controller_page/stream_controller_page.dart';
 import '../pages/bloc_page/components/stream_generate_page/stream_generate.dart';
 import '../pages/bloc_page/view.dart';
@@ -34,5 +36,9 @@ class AppRoutes {
         StreamControllerDemoPage(),
     RoutesName.streamGenerateDemoPage: (context, {arguments}) =>
         StreamGenerateDemoPage(),
+    RoutesName.futureBuilderDemoPage: (context, {arguments}) =>
+        FutureBuilderDemoPage(),
+    RoutesName.streamBuilderDemoPage: (context, {arguments}) =>
+        StreamBuilderDemoPage(),
   };
 }

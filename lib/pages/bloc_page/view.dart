@@ -37,6 +37,24 @@ class BlocDemoPage extends StatelessWidget {
               },
               child: Text('Navigate To Stream Generate Demo Page'),
             ),
+            OutlinedButton(
+              onPressed: () {
+                ZeusNavigator.open(
+                  context,
+                  RoutesName.futureBuilderDemoPage,
+                );
+              },
+              child: Text('Navigate To Future Builder Demo Page'),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                ZeusNavigator.open(
+                  context,
+                  RoutesName.streamBuilderDemoPage,
+                );
+              },
+              child: Text('Navigate To Stream Builder Demo Page'),
+            ),
           ],
         ),
       ),
