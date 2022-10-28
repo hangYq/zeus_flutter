@@ -12,14 +12,14 @@ class ProviderDemoPage extends StatelessWidget {
           title: Text('provider Demo'),
           centerTitle: true,
         ),
-        body: ChangeNotifierProvider.value(
+        body: ChangeNotifierProvider<ProviderViewModel>.value(
           value: ProviderViewModel(),
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return Column(
-              children: [
-                const Text("我是父节点"),
+              children: <Widget>[
+                const Text('我是父节点'),
                 Text(
-                  "Parent number is: ${Provider.of<ProviderViewModel>(context).number}",
+                  'Parent number is: ${Provider.of<ProviderViewModel>(context).number}',
                 ),
                 ChildA(),
               ],
@@ -40,16 +40,17 @@ class ProviderDemoPage extends StatelessWidget {
 class ChildA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("childA build");
+    print('childA build');
     return Container(
       width: double.infinity,
       color: Colors.amberAccent,
       child: Column(
-        children: [
+        children: <Widget>[
           Text(
-              "Child A number: ${Provider.of<ProviderViewModel>(context).number}"),
+            'Child A number: ${Provider.of<ProviderViewModel>(context).number}',
+          ),
           MaterialButton(
-            child: const Text("Add Number"),
+            child: const Text('Add Number'),
             color: Colors.white,
             onPressed: () {
               Provider.of<ProviderViewModel>(context, listen: false)
@@ -62,10 +63,10 @@ class ChildA extends StatelessWidget {
   }
 }
 
-class ProviderViewModel with ChangeNotifier {
+class ProviderViewModel extends ChangeNotifier {
   int _number = 0;
 
-  get number => _number;
+  int get number => _number;
 
   void addNumber() {
     _number++;

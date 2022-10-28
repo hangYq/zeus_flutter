@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../routes/constants.dart';
 import '../../utils/navigator.dart';
-import 'package:flutter/material.dart';
 
 class BlocPage extends StatelessWidget {
   const BlocPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class BlocPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             OutlinedButton(
               onPressed: () {
                 ZeusNavigator.open(

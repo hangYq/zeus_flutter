@@ -4,7 +4,7 @@ class StreamBuilderDemoPage extends StatelessWidget {
   const StreamBuilderDemoPage({Key? key}) : super(key: key);
 
   Stream<int> createStream() {
-    return Stream.periodic(Duration(seconds: 1), (int i) {
+    return Stream<int>.periodic(Duration(seconds: 1), (int i) {
       return i;
     });
   }
@@ -17,7 +17,7 @@ class StreamBuilderDemoPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: StreamBuilder(
+        child: StreamBuilder<int>(
           stream: createStream(),
           builder: (BuildContext contet, AsyncSnapshot<int> snapshot) {
             if (snapshot.hasError) {

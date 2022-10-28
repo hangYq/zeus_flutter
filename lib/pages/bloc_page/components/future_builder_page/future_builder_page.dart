@@ -4,7 +4,7 @@ class FutureBuilderDemoPage extends StatelessWidget {
   const FutureBuilderDemoPage({Key? key}) : super(key: key);
 
   Future<String> fetchData() async {
-    return Future.delayed(Duration(seconds: 3), () => 'mock 数据成功');
+    return Future<String>.delayed(Duration(seconds: 3), () => 'mock 数据成功');
   }
 
   @override
@@ -15,7 +15,7 @@ class FutureBuilderDemoPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: FutureBuilder(
+        child: FutureBuilder<String>(
           future: fetchData(),
           builder: (
             BuildContext context,

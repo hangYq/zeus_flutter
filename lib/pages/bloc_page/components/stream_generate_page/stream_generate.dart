@@ -21,7 +21,7 @@ class SignalStream {
   SignalState _signalState = SignalState(counter: 10, type: SignalType.denial);
   Stream<SignalState> createStream({int count = 100}) async* {
     for (int i = 0; i < count; i++) {
-      await Future.delayed(const Duration(seconds: 1));
+      await Future<void>.delayed(const Duration(seconds: 1));
       _signalState = _signalState.next();
       yield _signalState;
     }
@@ -57,7 +57,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
     });
   }
 
-  void onData(SignalState state) async {
+  Future<void> onData(SignalState state) async {
     _signalState = state;
     setState(() {});
   }
@@ -80,7 +80,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           if (_hasError)
             Text(
               'Error Signal',
@@ -165,12 +165,12 @@ class Lamp extends StatelessWidget {
 }
 
 class SignalLamp extends StatelessWidget {
-  final SignalState state;
-
   const SignalLamp({
-    Key? key,
     required this.state,
+    Key? key,
   }) : super(key: key);
+
+  final SignalState state;
 
   Color get activeColor {
     switch (state.type) {
@@ -186,7 +186,7 @@ class SignalLamp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
@@ -197,7 +197,7 @@ class SignalLamp extends StatelessWidget {
             alignment: WrapAlignment.center,
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 15,
-            children: [
+            children: <Widget>[
               Lamp(color: state.type == SignalType.denial ? activeColor : null),
               Lamp(color: state.type == SignalType.wait ? activeColor : null),
               Lamp(color: state.type == SignalType.allow ? activeColor : null),

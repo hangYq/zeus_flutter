@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   path: ^1.8.1
   path_provider: ^2.0.11
-  camus_lints: ^1.0.1
+
   scoped_model: ^2.0.0
   provider: ^6.0.4
   flutter_bloc: ^8.1.1
@@ -47,6 +47,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  camus_lints: 1.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

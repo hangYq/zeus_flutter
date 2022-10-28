@@ -11,16 +11,17 @@ class ButtonDemoPage extends StatelessWidget {
         title: const Text('Button Demo Page'),
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           BackButton(),
           ElevatedButton(
-              onPressed: null,
-              child: const Text(
-                'ElevatedButton',
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-              )),
+            onPressed: null,
+            child: const Text(
+              'ElevatedButton',
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+            ),
+          ),
           OutlinedButton(
             onPressed: () {},
             child: const Text(

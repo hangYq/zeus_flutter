@@ -6,7 +6,7 @@ class BlocDemoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<CounterCubit>(
       create: (_) => CounterCubit(),
       child: CounterView(),
     );
@@ -27,7 +27,7 @@ class CounterView extends StatelessWidget {
       ),
       body: Center(
         child: BlocBuilder<CounterCubit, int>(
-          builder: (context, state) {
+          builder: (BuildContext context, int state) {
             return Text('$state');
           },
         ),

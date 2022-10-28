@@ -16,7 +16,7 @@ class CounterCubit extends Cubit<int> {
 
 class SimpleBlocObserver extends BlocObserver {
   @override
-  void onChange(BlocBase bloc, Change change) {
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
     print('${bloc.runtimeType} $change');
   }
@@ -37,7 +37,7 @@ class CounterIncrementPressed extends CounterEvent {}
 class CounterBloc extends Bloc<CounterEvent, int> {
   CounterBloc() : super(0) {
     on<CounterIncrementPressed>(
-      (event, emit) {
+      (CounterIncrementPressed event, Emitter<int> emit) {
         emit(state + 1);
       },
     );

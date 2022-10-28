@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 /// 通用的 InheritedWidget, 用来保存需要跨组件共享的数据状态
 class InheritedProvider<T> extends InheritedWidget {
   InheritedProvider({
-    Key? key,
     required Widget child,
     required this.data,
+    Key? key,
   }) : super(key: key, child: child);
 
   // final Widget child;
@@ -29,9 +29,9 @@ class InheritedProvider<T> extends InheritedWidget {
 ///
 class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   const ChangeNotifierProvider({
-    Key? key,
     required this.child,
     required this.data,
+    Key? key,
   }) : super(key: key);
 
   final Widget child;
@@ -40,7 +40,7 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
   /// 定义一个便捷方法，方便对子树中的 Widget 获取共享数据
   /// 子Widget可以通过Inherited widgets提供的静态of方法拿到离他最近的父Inherited widgets实例
   static T of<T>(BuildContext context, {bool listen = true}) {
-    final provider = listen
+    final InheritedProvider<T>? provider = listen
         ? context.dependOnInheritedWidgetOfExactType<InheritedProvider<T>>()
         : context
             .getElementForInheritedWidgetOfExactType<InheritedProvider<T>>()
@@ -54,7 +54,7 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
 }
 
 class _ChangeNotifierProviderState<T extends ChangeNotifier>
-    extends State<ChangeNotifierProvider> {
+    extends State<ChangeNotifierProvider<T>> {
   void update() {
     /// 如果数据发生变化，model 类调用了notifyListeners ,重新构建 InheritProvider
     setState(() {});
@@ -88,7 +88,7 @@ class _ChangeNotifierProviderState<T extends ChangeNotifier>
   @override
   Widget build(BuildContext context) {
     return InheritedProvider<T>(
-      data: widget.data as T,
+      data: widget.data,
       child: widget.child,
     );
   }
@@ -108,10 +108,13 @@ class CartModel extends ChangeNotifier {
   final List<Item> _items = <Item>[];
 
   // 禁止改变购物车里的商品信息
-  UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
+  UnmodifiableListView<Item> get items => UnmodifiableListView<Item>(_items);
 
   double get totalPrice => _items.fold(
-      0, (previousValue, item) => previousValue + item.price * item.count);
+        0,
+        (double previousValue, Item item) =>
+            previousValue + item.price * item.count,
+      );
 
   void add(Item item) {
     _items.add(item);
@@ -134,17 +137,19 @@ class _ProviderDemoRouteState extends State<ProviderDemoRoute> {
       data: CartModel(),
       child: Center(
         child: Column(
-          children: [
-            Consumer<CartModel>(builder: (context, model) {
-              return Text(
-                '总价：${model!.totalPrice}',
-              );
-            }),
+          children: <Widget>[
+            Consumer<CartModel>(
+              builder: (BuildContext context, CartModel? model) {
+                return Text(
+                  '总价：${model!.totalPrice}',
+                );
+              },
+            ),
             Builder(
-              builder: (context) {
-                print("ElevatedButton build"); // 构建时输出日志
+              builder: (BuildContext context) {
+                print('ElevatedButton build'); // 构建时输出日志
                 return ElevatedButton(
-                  child: Text("添加商品"),
+                  child: Text('添加商品'),
                   onPressed: () {
                     ChangeNotifierProvider.of<CartModel>(context, listen: false)
                         .add(
@@ -199,8 +204,8 @@ class _ProviderDemoRouteState extends State<ProviderDemoRoute> {
 // 这是一个便捷类，会获得当前context和指定数据类型的Provider
 class Consumer<T> extends StatelessWidget {
   Consumer({
-    Key? key,
     required this.builder,
+    Key? key,
   }) : super(key: key);
 
   final Widget Function(BuildContext context, T? value) builder;

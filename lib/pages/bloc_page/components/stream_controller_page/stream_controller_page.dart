@@ -27,7 +27,8 @@ class StreamHomePage extends StatefulWidget {
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
-  final StreamController<SignalState> streamController = StreamController(
+  final StreamController<SignalState> streamController =
+      StreamController<SignalState>(
     onListen: () {
       print('onListen');
     },
@@ -49,9 +50,9 @@ class _StreamHomePageState extends State<StreamHomePage> {
   void initState() {
     _subscription = streamController.stream.listen(
       onData,
-      onError: (err) async {
+      onError: (dynamic err) async {
         handleError(flag: true);
-        await Future.delayed(const Duration(seconds: 3));
+        await Future<void>.delayed(const Duration(seconds: 3));
         handleError(flag: false);
         onData(_signalState.next());
       },
@@ -67,11 +68,11 @@ class _StreamHomePageState extends State<StreamHomePage> {
     });
   }
 
-  void onData(SignalState state) async {
+  Future<void> onData(SignalState state) async {
     setState(() {
       _signalState = state;
     });
-    await Future.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     final SignalState nextState = state.next();
     if (nextState.counter == 7 && nextState.type == SignalType.denial) {
       streamController.addError(Exception('Error Signal'));
@@ -100,7 +101,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           if (_hasError)
             Text(
               'Error Signal',
@@ -185,12 +186,12 @@ class Lamp extends StatelessWidget {
 }
 
 class SignalLamp extends StatelessWidget {
-  final SignalState state;
-
   const SignalLamp({
-    Key? key,
     required this.state,
+    Key? key,
   }) : super(key: key);
+
+  final SignalState state;
 
   Color get activeColor {
     switch (state.type) {
@@ -206,7 +207,7 @@ class SignalLamp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
@@ -217,7 +218,7 @@ class SignalLamp extends StatelessWidget {
             alignment: WrapAlignment.center,
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 15,
-            children: [
+            children: <Widget>[
               Lamp(color: state.type == SignalType.denial ? activeColor : null),
               Lamp(color: state.type == SignalType.wait ? activeColor : null),
               Lamp(color: state.type == SignalType.allow ? activeColor : null),

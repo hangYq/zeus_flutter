@@ -20,20 +20,20 @@ class _FutureDemoPageState extends State<FutureDemoPage> {
 
   static FutureOr<int> _increment(int initCount) async {
     int counter = initCount;
-    for (var i = 0; i < 1000000000; i++) {
+    for (int i = 0; i < 1000000000; i++) {
       counter += i;
     }
     return counter;
   }
 
-  void _incrementCounter() async {
+  Future<void> _incrementCounter() async {
     final int result = await _increment(0);
     setState(() {
       _count = result;
     });
   }
 
-  void _incrementCounterByCompute() async {
+  Future<void> _incrementCounterByCompute() async {
     final int result = await compute(_increment, 0);
     setState(() {
       _count = result;
@@ -62,7 +62,7 @@ class _FutureDemoPageState extends State<FutureDemoPage> {
             Text('你点击了$_count次'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 OutlinedButton(
                   onPressed: _onReset,
                   child: const Text(

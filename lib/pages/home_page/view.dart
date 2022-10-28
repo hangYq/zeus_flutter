@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../routes/routes.dart';
 import '../../routes/constants.dart';
+import '../../routes/routes.dart';
 import '../../utils/navigator.dart';
 
 class HomePage extends StatelessWidget {
