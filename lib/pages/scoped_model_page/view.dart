@@ -30,22 +30,30 @@ class ScopedModelDemoPage extends StatelessWidget {
         //     );
         //   },
         // ),
-        child: ScopedModelDescendant<CounterModel>(
-          builder: (BuildContext context, Widget? child, CounterModel model) =>
-              Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('${model.counter}'),
-                OutlinedButton(
-                  onPressed: ScopedModel.of<CounterModel>(context).increment,
-                  // onPressed: model.increment,
-                  child: Text('add'),
-                ),
-              ],
-            ),
+        child: NewWidget(),
+      ),
+    );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('${CounterModel.of(context).counter}'),
+          OutlinedButton(
+            onPressed: CounterModel.of(context).increment,
+            // onPressed: model.increment,
+            child: Text('add'),
           ),
-        ),
+        ],
       ),
     );
   }
