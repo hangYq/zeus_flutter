@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../pages/plugin_page/view.dart';
 import './constants.dart';
 import '../pages/bloc_page/components/bloc_demo_page/bloc_demo_page.dart';
 import '../pages/bloc_page/components/future_builder_page/future_builder_page.dart';
@@ -51,5 +52,7 @@ class AppRoutes {
         (BuildContext context, {dynamic arguments}) => FutureBuilderDemoPage(),
     RoutesName.streamBuilderDemoPage:
         (BuildContext context, {dynamic arguments}) => StreamBuilderDemoPage(),
+    RoutesName.pluginDemoPage: (BuildContext context, {dynamic arguments}) =>
+        PluginDemoPage(),
   };
 }

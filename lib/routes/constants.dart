@@ -16,4 +16,5 @@ class RoutesName {
       'bloc_page/future_builder_demo_page';
   static const String streamBuilderDemoPage =
       'bloc_page/stream_builder_demo_page';
+  static const String pluginDemoPage = 'pluginDemoPage';
 }
