@@ -10,6 +10,8 @@ class PluginDemoPage extends StatefulWidget {
 }
 
 class _PluginDemoPageState extends State<PluginDemoPage> {
+  String? nativeResult;
+
   Future<void> sendDataToNative() async {
     final PluginTest plugin = PluginTest();
     final Map<dynamic, dynamic>? result = await plugin.sendDataToNative(
@@ -18,7 +20,9 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
         'age': '20',
       },
     );
-    print('$result');
+    setState(() {
+      nativeResult = '$result';
+    });
   }
 
   @override
@@ -35,6 +39,7 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
               onPressed: sendDataToNative,
               child: Text('sendDataToNative'),
             ),
+            Text('Native 返回的数据:$nativeResult'),
           ],
         ),
       ),
