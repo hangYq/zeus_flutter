@@ -1,10 +1,20 @@
 import 'package:flutter/services.dart';
 
+typedef MethodCallback = void Function(dynamic result);
+
 class PluginTest {
   factory PluginTest() {
     if (_singleton == null) {
-      const MethodChannel methodChannel =
-          MethodChannel('flutter.billionbottle.com/method-channel');
+      final MethodChannel methodChannel =
+          MethodChannel('flutter.billionbottle.com/method-channel')
+            // setMethodCallHandler
+            ..setMethodCallHandler((MethodCall call) async {
+              final String callMethodName = call.method;
+              if (_callbacks[callMethodName] != null) {
+                return _callbacks[callMethodName](call.arguments);
+              }
+            });
+
       const EventChannel eventChannel =
           EventChannel('flutter.billionbottle.com/event-channel');
       _singleton = PluginTest._(
@@ -23,6 +33,15 @@ class PluginTest {
   final MethodChannel _methodChannel;
   final EventChannel _eventChanel;
   static PluginTest? _singleton;
+  static final Map<String, dynamic> _callbacks = <String, MethodCallback>{};
+
+  void registerCallback(String callMethodName, MethodCallback callback) {
+    _callbacks[callMethodName] = callback;
+  }
+
+  void unregisterCallback(String callMethodName) {
+    _callbacks.remove(callMethodName);
+  }
 
   Future<Map<dynamic, dynamic>?> sendDataToNative(
     Map<String, dynamic> params,

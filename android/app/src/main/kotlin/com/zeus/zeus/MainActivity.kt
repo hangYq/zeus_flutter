@@ -8,6 +8,6 @@ class MainActivity: FlutterActivity() {
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        MethodChannelTest(flutterEngine.dartExecutor.binaryMessenger)
+        MethodChannelTest(this,flutterEngine.dartExecutor.binaryMessenger)
     }
 }

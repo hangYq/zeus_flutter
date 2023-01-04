@@ -11,6 +11,27 @@ class PluginDemoPage extends StatefulWidget {
 
 class _PluginDemoPageState extends State<PluginDemoPage> {
   String? nativeResult;
+  String? receiverResult;
+
+  @override
+  void initState() {
+    super.initState();
+    final PluginTest plugin = PluginTest();
+    plugin.registerCallback('timer', receiverNative);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    final PluginTest plugin = PluginTest();
+    plugin.unregisterCallback('timer');
+  }
+
+  void receiverNative(dynamic result) {
+    setState(() {
+      receiverResult = '$result';
+    });
+  }
 
   Future<void> sendDataToNative() async {
     final PluginTest plugin = PluginTest();
@@ -40,6 +61,7 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
               child: Text('sendDataToNative'),
             ),
             Text('Native 返回的数据:$nativeResult'),
+            Text('Native 主动调用 Flutter 返回的数据:$receiverResult'),
           ],
         ),
       ),
