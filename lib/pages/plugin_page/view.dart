@@ -12,6 +12,7 @@ class PluginDemoPage extends StatefulWidget {
 class _PluginDemoPageState extends State<PluginDemoPage> {
   String? nativeResult;
   String? receiverResult;
+  String? basicMessageResult;
 
   @override
   void initState() {
@@ -46,6 +47,19 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
     });
   }
 
+  Future<void> sendBasicMessage() async {
+    final PluginTest plugin = PluginTest();
+    final Map<dynamic, dynamic>? result = await plugin.sendBasicMessage(
+      <String, dynamic>{
+        'name': 'tom',
+        'age': '20',
+      },
+    );
+    setState(() {
+      basicMessageResult = '$result';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,6 +76,11 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
             ),
             Text('Native 返回的数据:$nativeResult'),
             Text('Native 主动调用 Flutter 返回的数据:$receiverResult'),
+            OutlinedButton(
+              onPressed: sendBasicMessage,
+              child: Text('SendBasicMessage'),
+            ),
+            Text('basicMessageResult 返回的数据:$basicMessageResult'),
           ],
         ),
       ),

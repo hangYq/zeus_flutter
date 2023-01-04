@@ -17,9 +17,16 @@ class PluginTest {
 
       const EventChannel eventChannel =
           EventChannel('flutter.billionbottle.com/event-channel');
+      const BasicMessageChannel<dynamic> basicMessageChannel =
+          BasicMessageChannel<dynamic>(
+        'flutter.billionbottle.com/basic-message-channel',
+        StandardMessageCodec(),
+      );
+
       _singleton = PluginTest._(
         methodChannel,
         eventChannel,
+        basicMessageChannel,
       );
     }
     return _singleton!;
@@ -28,9 +35,11 @@ class PluginTest {
   PluginTest._(
     this._methodChannel,
     this._eventChanel,
+    this._basicMessageChannel,
   );
 
   final MethodChannel _methodChannel;
+  final BasicMessageChannel<dynamic> _basicMessageChannel;
   final EventChannel _eventChanel;
   static PluginTest? _singleton;
   static final Map<String, dynamic> _callbacks = <String, MethodCallback>{};
@@ -50,6 +59,14 @@ class PluginTest {
       'sendDataToNative',
       params,
     );
+    return result;
+  }
+
+  Future<Map<dynamic, dynamic>?> sendBasicMessage(
+    Map<String, dynamic> params,
+  ) async {
+    final Map<dynamic, dynamic>? result =
+        await _basicMessageChannel.send(params);
     return result;
   }
 }
