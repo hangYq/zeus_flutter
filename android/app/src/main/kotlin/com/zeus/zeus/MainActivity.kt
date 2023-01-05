@@ -10,5 +10,6 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         MethodChannelTest(this,flutterEngine.dartExecutor.binaryMessenger)
         BasicMessageChannelTest(flutterEngine.dartExecutor.binaryMessenger)
+        EventChannelTest(this,flutterEngine.dartExecutor.binaryMessenger)
     }
 }

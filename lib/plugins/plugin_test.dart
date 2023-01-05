@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 typedef MethodCallback = void Function(dynamic result);
@@ -68,5 +70,9 @@ class PluginTest {
     final Map<dynamic, dynamic>? result =
         await _basicMessageChannel.send(params);
     return result;
+  }
+
+  StreamSubscription<dynamic> onProgress(MethodCallback callback) {
+    return _eventChanel.receiveBroadcastStream().listen(callback);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../plugins/plugin_test.dart';
@@ -13,12 +15,21 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
   String? nativeResult;
   String? receiverResult;
   String? basicMessageResult;
+  dynamic eventChannelResult;
+  StreamSubscription<dynamic>? subscription;
 
   @override
   void initState() {
     super.initState();
     final PluginTest plugin = PluginTest();
     plugin.registerCallback('timer', receiverNative);
+    subscription = plugin.onProgress(_onData);
+  }
+
+  void _onData(dynamic event) {
+    setState(() {
+      eventChannelResult = event;
+    });
   }
 
   @override
@@ -26,6 +37,7 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
     super.dispose();
     final PluginTest plugin = PluginTest();
     plugin.unregisterCallback('timer');
+    subscription?.cancel();
   }
 
   void receiverNative(dynamic result) {
@@ -81,6 +93,7 @@ class _PluginDemoPageState extends State<PluginDemoPage> {
               child: Text('SendBasicMessage'),
             ),
             Text('basicMessageResult 返回的数据:$basicMessageResult'),
+            Text('eventChannel 返回的数据:$eventChannelResult'),
           ],
         ),
       ),
