@@ -26,12 +26,7 @@ class _InheritedDemoPageState extends State<InheritedDemoPage> {
       body: InheritedInfoWidget(
         number: _number,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              InfoChildWidget(),
-            ],
-          ),
+          child: InfoChildWidget(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -58,18 +53,28 @@ class InheritedInfoWidget extends InheritedWidget {
   final Widget child;
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
+  bool updateShouldNotify(covariant InheritedInfoWidget oldWidget) {
+    return oldWidget.number != number;
   }
 
   static InheritedInfoWidget? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<InheritedInfoWidget>();
+    // return context.dependOnInheritedWidgetOfExactType<InheritedInfoWidget>();
 
-    // return context
-    //     .getElementForInheritedWidgetOfExactType<InheritedInfoWidget>()
-    //     ?.widget as InheritedInfoWidget;
+    return context
+        .getElementForInheritedWidgetOfExactType<InheritedInfoWidget>()
+        ?.widget as InheritedInfoWidget;
   }
 }
+
+// class InfoChildWidget extends StatelessWidget {
+//   const InfoChildWidget({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final int number = InheritedInfoWidget.of(context)!.number;
+//     return Text('$number');
+//   }
+// }
 
 class InfoChildWidget extends StatefulWidget {
   const InfoChildWidget({Key? key}) : super(key: key);
@@ -84,7 +89,7 @@ class _InfoChildWidgetState extends State<InfoChildWidget> {
     super.didChangeDependencies();
     //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    print('Dependencies change');
+    print('===== Dependencies change======');
   }
 
   @override

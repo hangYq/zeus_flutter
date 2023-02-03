@@ -15,46 +15,65 @@ class ScopedModelDemoPage extends StatelessWidget {
       ),
       body: ScopedModel<CounterModel>(
         model: CounterModel(),
+        child: ScopedModelDescendant<CounterModel>(
+          builder: (BuildContext context, Widget? child, CounterModel model) =>
+              Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${model.counter}'),
+                OutlinedButton(
+                  // onPressed: ScopedModel.of<CounterModel>(context).increment,
+                  onPressed: model.increment,
+                  child: Text('add'),
+                ),
+              ],
+            ),
+          ),
+        ),
+
         // 不使用 ScopedModelDescendant 的用法
         // child: Builder(
-        //   builder: (context) {
-        //     return Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Text('${CounterModel.of(context).counter}'),
-        //         OutlinedButton(
-        //           onPressed: CounterModel.of(context).increment,
-        //           child: Text('add1'),
-        //         ),
-        //       ],
+        //   builder: (BuildContext context) {
+        //     return Center(
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: <Widget>[
+        //           Text('${CounterModel.of(context).counter}'),
+        //           OutlinedButton(
+        //             onPressed: CounterModel.of(context).increment,
+        //             child: Text('add1'),
+        //           ),
+        //         ],
+        //       ),
         //     );
         //   },
         // ),
-        child: NewWidget(),
+        // child: NewWidget(),
       ),
     );
   }
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
-    Key? key,
-  }) : super(key: key);
+// class NewWidget extends StatelessWidget {
+//   const NewWidget({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('${CounterModel.of(context).counter}'),
-          OutlinedButton(
-            onPressed: CounterModel.of(context).increment,
-            // onPressed: model.increment,
-            child: Text('add'),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: <Widget>[
+//           Text('${CounterModel.of(context).counter}'),
+//           OutlinedButton(
+//             onPressed: CounterModel.of(context).increment,
+//             // onPressed: model.increment,
+//             child: Text('add'),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

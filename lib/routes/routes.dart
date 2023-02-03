@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../pages/plugin_page/view.dart';
 import './constants.dart';
 import '../pages/bloc_page/components/bloc_demo_page/bloc_demo_page.dart';
 import '../pages/bloc_page/components/future_builder_page/future_builder_page.dart';
@@ -13,6 +12,7 @@ import '../pages/custom_provider_page/view.dart';
 import '../pages/future_page/view.dart';
 import '../pages/home_page/view.dart';
 import '../pages/inherited_page/view.dart';
+import '../pages/plugin_page/view.dart';
 import '../pages/provider_page/view.dart';
 import '../pages/scoped_model_page/view.dart';
 
